@@ -73,8 +73,10 @@ export class UserController {
   ): Promise<OutputUserDto> {
     let avatar = '';
     if (image) {
-      avatar = `http://localhost:3000/uploads/${image.filename}`;
+      avatar = process.env.DOMAIN + image.filename;
     }
+
+    console.log(avatar);
 
     return this.userService.create(user, avatar);
   }
@@ -99,7 +101,7 @@ export class UserController {
     const username = req.user.username;
     let avatar = '';
     if (image) {
-      avatar = `http://localhost:3000/uploads/${image.filename}`;
+      avatar = process.env.DOMAIN + image.filename;
     }
 
     console.log(updateUser);
